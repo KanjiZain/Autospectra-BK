@@ -313,14 +313,20 @@ app.post("/DeleteCar", async (req, res) => {
 
     if (result) {
       const result = await UserSchema.updateMany(
-        { wishlist: { $elemMatch: { carName: carNameToRemove } } },
-        { $pull: { wishlist: { carName: carNameToRemove } } }
+        { wishlist: { $elemMatch: { carName: carNameToDelete } } },
+        { $pull: { wishlist: { carName: carNameToDelete } } }
       );
+      console.log("abc")
       res.send({ message: "Deleted" });
     } else {
+            console.log("abc1");
+
       res.json({ message: `Car with carName ${carNameToDelete} not found` });
     }
-  } catch (error) {}
+  } catch (error) {
+          console.log(error);
+
+  }
 });
 
 app.post("/Getuser", async (req, res) => {
